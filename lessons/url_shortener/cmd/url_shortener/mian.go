@@ -1,1 +1,5 @@
-package url_shortener
+package main
+
+func main() {
+	
+}
