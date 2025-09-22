@@ -42,14 +42,14 @@ func New(storagePath string) (*Storage, error) {
 
 }
 
-func (s *Storage) UrlSave(urlToSAve string, alias string) (int64, error) {
+func (s *Storage) SaveUrl(urlToSave string, alias string) (int64, error) {
 	const op = "storage.sqlite.urlToSave"
 	stmt, err := s.db.Prepare("INSERT INTO url (alias, url) VALUES (?, ?)")
 	if err != nil {
 		return 0, fmt.Errorf("%s: %w", op, err)
 	}
 
-	res, err := stmt.Exec(alias, urlToSAve)
+	res, err := stmt.Exec(alias, urlToSave)
 	if err != nil {
 		if sqliteErr, ok := err.(sqlite3.Error); ok {
 			if sqliteErr.ExtendedCode == sqlite3.ErrConstraintUnique {

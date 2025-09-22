@@ -25,7 +25,7 @@ type Response struct {
 }
 
 type URLSaver interface {
-	SaveUrl(urlToSAve string, alias string) (int64, error)
+	SaveUrl(urlToSave string, alias string) (int64, error)
 }
 
 const aliasLenght = 6
