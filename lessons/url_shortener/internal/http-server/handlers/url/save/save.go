@@ -1,6 +1,7 @@
 package save
 
 import (
+	"errors"
 	"log/slog"
 	"net/http"
 	resp "url_shortener/internal/lib/api/responce"
@@ -25,6 +26,8 @@ type URLSaver interface {
 	SaveUrl(urlToSAve string, alias string) (int64, error)
 }
 
+const aliasLenght = 6
+
 func New(log *slog.Logger, urlSaver URLSaver) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		const op = "habdlers.url.save.New"
@@ -47,11 +50,19 @@ func New(log *slog.Logger, urlSaver URLSaver) http.HandlerFunc {
 		log.Info("request body decoded", slog.Any("request", req))
 
 		if err := validator.New().Struct(req); err != nil {
+			var validateErr validator.ValidationErrors
+			errors.As(err, &validateErr)
 			log.Error("%s: %s", op, sl.Err(err))
 
 			render.JSON(w, r, resp.Error("invalid request"))
+			render.JSON(w, r, resp.ValidationError(validateErr))
 
 			return
+		}
+
+		alias := req.Alias
+		if alias == "" {
+			alias = random.NewRandomString(aliasLenght)
 		}
 
 	}
