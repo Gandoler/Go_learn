@@ -92,3 +92,5 @@ AwesomeApi/API/packages/
 /publish
 
 .db
+.db.*
+lessons/url_shortener/storage/storage.db
