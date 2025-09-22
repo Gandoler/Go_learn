@@ -4,6 +4,7 @@ import (
 	"log/slog"
 	"os"
 	"url_shortener/internal/config"
+	"url_shortener/internal/lib/logger/sl"
 	sqlite "url_shortener/internal/storage/sqllite"
 )
 
@@ -24,12 +25,13 @@ func main() {
 	log.Info("Starting url_shortener", slog.String("env", cfg.Env))
 	log.Debug("debug messages are enabled")
 
-	storage, err := sqlite.New(cfg.StoragePath){
-		if err != nil{
-			log.Error("")
-			os.Exit(1)
-		}
+	storage, err := sqlite.New(cfg.StoragePath)
+	if err != nil {
+		log.Error("filed to init storage", sl.Err(err))
+		os.Exit(1)
 	}
+
+	_ = storage
 
 }
 
