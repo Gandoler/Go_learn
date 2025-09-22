@@ -15,7 +15,7 @@ go get github.com/go-chi/render
 
 go get github.com/fatih/color
 go get github.com/go-playground/validator/v10
-
+go get github.com/stretchr/testify/assert
 ```
 
 >не уверен что это все

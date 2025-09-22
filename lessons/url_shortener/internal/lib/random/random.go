@@ -1,10 +1,12 @@
 package random
 
 import (
-	"crypto/rand"
-	"encoding/base64"
 	"fmt"
+	"math/rand"
+	"time"
 )
+
+var letters = []byte("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_")
 
 func randomStringUrl(length int) (string, error) {
 	if length < 1 {
@@ -13,11 +15,11 @@ func randomStringUrl(length int) (string, error) {
 	if length > 255 {
 		return "", fmt.Errorf("length too large")
 	}
+	rand.Seed(time.Now().UnixNano())
 
 	b := make([]byte, length)
-	_, err := rand.Read(b)
-	if err != nil {
-		return "", err
+	for i := range b {
+		b[i] = letters[rand.Intn(len(letters))]
 	}
-	return base64.RawURLEncoding.EncodeToString(b)[:length], nil
+	return string(b), nil
 }
