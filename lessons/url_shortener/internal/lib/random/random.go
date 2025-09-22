@@ -8,7 +8,7 @@ import (
 
 var letters = []byte("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_")
 
-func randomStringUrl(length int) (string, error) {
+func RandomStringUrl(length int) (string, error) {
 	if length < 1 {
 		return "", fmt.Errorf("length too small")
 	}
