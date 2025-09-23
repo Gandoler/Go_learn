@@ -25,3 +25,12 @@ go install github.com/vektra/mockery/v2@latest
 go:generate go run github.com/vektra/mockery/v2@latest --name=URLSaver
 
 >не уверен что это все
+
+
+а это уже в тестах
+
+```bash
+go get  github.com/brianvoe/gofakeit/v6
+go get 	github.com/gavv/httpexpect/v2
+
+```
