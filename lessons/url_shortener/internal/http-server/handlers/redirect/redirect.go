@@ -13,7 +13,7 @@ import (
 	"github.com/go-chi/render"
 )
 
-//go:generate go run github.com/vektra/mockery/v2@v2.28.2 --name=URLGetter
+//go:generate go run github.com/vektra/mockery/v2@latest  --name=UrlGetter
 type UrlGetter interface {
 	GetUrl(alias string) (string, error)
 }
