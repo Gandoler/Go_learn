@@ -16,6 +16,8 @@ go get github.com/go-chi/render
 go get github.com/fatih/color
 go get github.com/go-playground/validator/v10
 go get github.com/stretchr/testify/assert
+
+go:generate go run github.com/vektra/mockery/v2@v2.28.2 --name=URLSaver
 ```
 
 >не уверен что это все

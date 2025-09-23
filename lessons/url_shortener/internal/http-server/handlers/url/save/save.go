@@ -28,11 +28,11 @@ type URLSaver interface {
 	SaveUrl(urlToSave string, alias string) (int64, error)
 }
 
-const aliasLenght = 6
+const aliasLength = 6
 
 func New(log *slog.Logger, urlSaver URLSaver) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		const op = "habdlers.url.save.New"
+		const op = "handlers.url.save.New"
 
 		log = log.With(
 			slog.String("op", op),
@@ -64,7 +64,7 @@ func New(log *slog.Logger, urlSaver URLSaver) http.HandlerFunc {
 
 		alias := req.Alias
 		if alias == "" {
-			alias, err = random.RandomStringUrl(aliasLenght)
+			alias, err = random.RandomStringUrl(aliasLength)
 			if err != nil {
 				log.Error("%s: %s", op, sl.Err(err))
 			}
