@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"url_shortener/internal/storage"
 
-	"github.com/mattn/go-sqlite3"
+	_ "github.com/mattn/go-sqlite3"
 )
 
 type Storage struct {
@@ -51,12 +51,13 @@ func (s *Storage) SaveUrl(urlToSave string, alias string) (int64, error) {
 
 	res, err := stmt.Exec(alias, urlToSave)
 	if err != nil {
-		if sqliteErr, ok := err.(sqlite3.Error); ok {
-			if sqliteErr.ExtendedCode == sqlite3.ErrConstraintUnique {
-				return 0, fmt.Errorf("%s:  %w", op, storage.ErrURLExists)
+		var sqliteErr interface{ Code() int }
+		if errors.As(err, &sqliteErr) {
+			// 2067 — UNIQUE constraint violation
+			if sqliteErr.Code() == 2067 {
+				return 0, fmt.Errorf("%s: %w", op, storage.ErrURLExists)
 			}
 		}
-
 		return 0, fmt.Errorf("%s: %w", op, err)
 	}
 

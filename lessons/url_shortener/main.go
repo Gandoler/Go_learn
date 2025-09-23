@@ -27,7 +27,12 @@ const (
 func main() {
 	//TIP <p>Press <shortcut actionId="ShowIntentionActions"/> when your caret is at the underlined text
 	// to see how GoLand suggests fixing the warning.</p><p>Alternatively, if available, click the lightbulb to view possible fixes.</p>
-	cfg := config.MustLoad()
+	cgoPath := os.Getenv("Path")
+	if cgoPath == "" {
+		panic("No CGOPATH")
+	}
+	cfgPath := os.Getenv("CONFIG_PATH")
+	cfg := config.MustLoad(cfgPath)
 	log := setupLogger(cfg.Env)
 	log.Info("Starting url_shortener", slog.String("env", cfg.Env))
 	log.Debug("debug messages are enabled")
