@@ -1,4 +1,4 @@
-package delete
+package deleteUrl
 
 import (
 	"log/slog"
