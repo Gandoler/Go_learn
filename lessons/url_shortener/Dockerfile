@@ -1,15 +1,17 @@
-FROM golang:1.22 AS build
+FROM golang:1.25 AS build
 
 WORKDIR /src
 
 
-COPY go.mod go.sum ./
+RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
+
+RUN git clone https://github.com/Gandoler/Go_learn.git
+
+WORKDIR /src/Go_learn/lessons/url_shortener
+
+
 
 RUN go mod download
-
-COPY . .
-
-
 RUN go build -o /app/url_shortener ./cmd/url_shortener
 
 
@@ -20,9 +22,8 @@ WORKDIR /app
 COPY --from=build /app/url_shortener .
 
 
-COPY ./config ./config
 
-ENV CONFIG_PATH=/app/config/config.yaml
+ENV CONFIG_PATH=./cmd/config/prod.yaml
 
 
 EXPOSE 8082
