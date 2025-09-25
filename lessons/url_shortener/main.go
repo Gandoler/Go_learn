@@ -30,6 +30,9 @@ func main() {
 	//TIP <p>Press <shortcut actionId="ShowIntentionActions"/> when your caret is at the underlined text
 	// to see how GoLand suggests fixing the warning.</p><p>Alternatively, if available, click the lightbulb to view possible fixes.</p>
 	cfgPath := os.Getenv("CONFIG_PATH")
+	if _, err := os.Stat(cfgPath); err != nil {
+		panic("config file not found: " + cfgPath)
+	}
 	cfg := config.MustLoad(cfgPath)
 	log := setupLogger(cfg.Env)
 	log.Info("Starting url_shortener", slog.String("env", cfg.Env))
