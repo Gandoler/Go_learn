@@ -94,3 +94,6 @@ AwesomeApi/API/packages/
 .db
 .db.*
 lessons/url_shortener/storage/storage.db
+
+
+lessons\url_shortener\cmd\config\local.yaml
