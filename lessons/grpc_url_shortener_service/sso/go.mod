@@ -6,6 +6,7 @@ require (
 	github.com/fatih/color v1.18.0
 	github.com/ilyakaznacheev/cleanenv v1.5.0
 	golang.org/x/exp v0.0.0-20250911091902-df9299821621
+	github.com/Gandoler/protos/subfolderForUrlShortener v0.0.2
 )
 
 require (
