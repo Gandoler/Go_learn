@@ -97,3 +97,4 @@ lessons/url_shortener/storage/storage.db
 
 
 lessons\url_shortener\cmd\config\local.yaml
+lessons/grpc_url_shortener_service/sso/config/local.yml
