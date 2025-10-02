@@ -6,7 +6,6 @@ require (
 	github.com/fatih/color v1.18.0
 	github.com/ilyakaznacheev/cleanenv v1.5.0
 	golang.org/x/exp v0.0.0-20250911091902-df9299821621
-	github.com/Gandoler/protos/subfolderForUrlShortener v0.0.2
 )
 
 require (
@@ -17,4 +16,7 @@ require (
 	golang.org/x/sys v0.25.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	olympos.io/encoding/edn v0.0.0-20201019073823-d3554ca0b0a3 // indirect
+
 )
+
+replace github.com/Gandoler/protos/subfolderForUrlShortener => ../protos_lib
